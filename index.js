@@ -10,9 +10,9 @@ let users = originalUsers
 
 boostrap(router => {
 
-    router.get('/', (req, res, next) => {
+    router.get('/', async (req, res, next) => {
         const optionalParams = req.query
-        res.status(200).json(getUsers(users, optionalParams))
+        res.status(200).json(await getUsers(optionalParams))
     })
 
     router.get('/:id', (req, res, next) => {
@@ -21,9 +21,9 @@ boostrap(router => {
         res.status(200).json(user)
     })    
 
-    router.post('/', (req, res, next) => {
+    router.post('/', async (req, res, next) => {
         const user = req.body
-        const result = addUser(user, users)
+        const result = await addUser(user, users)
         res.status(200).json({
             OK: result
         })

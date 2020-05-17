@@ -1,7 +1,8 @@
+import {query} from '../db'
 
-const addUser = (user, users) => {
-    user.id = users.length + 1
-    users.push(user)
+const addUser = async (user, users) => {
+    const result = await query(`insert into users(name) values('${user.name}')`)
+    console.log(result)
     return true
 }
 

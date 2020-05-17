@@ -1,7 +1,18 @@
-const getUsers = (users, optionalParams = {}) => {
+import {query} from '../db'
+
+const getUsers = async (optionalParams = {}) => {
+    const result = await query('SELECT id, name FROM users')
+    let users = result.map(user => {
+        return  {
+            id: user.id,
+            name: user.name,
+        }
+    })
+
     if(optionalParams["ordeById"] != undefined){
         users = ordeBy(users, optionalParams["ordeById"])
     }
+
     return users
 }
 

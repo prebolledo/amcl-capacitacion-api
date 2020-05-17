@@ -1,6 +1,6 @@
 version: '3.7'
 services: 
-    mysql:
+    mysqldb:
         image: mysql
         command: --default-authentication-plugin=mysql_native_password
         restart: always
@@ -18,6 +18,8 @@ services:
             dockerfile: Dockerfile
         ports:
             - 11000:3000
+        environment:
+            MYSQL_CONNECTION_STRING: mysql://root:admin@mysqldb/capacitacion?debug=true&charset=UTF8_GENERAL_CI&timezone=-0700
         volumes:
             - .:/usr/src/app
 networks:
